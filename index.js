@@ -176,7 +176,13 @@ function animate() {
             opacity: 1,
             repeat: 3,
             yoyo: true,
-            duration: 0.3
+            duration: 0.3,
+            onComplete() {
+                gsap.to("overlappingDiv", {
+                    opacity:1,
+                    duration: 0.3,
+                })
+            }
         })
         battle.initiated = true
           break;
