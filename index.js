@@ -3,6 +3,7 @@ const c = canvas.getContext("2d");
 
 
 
+
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -134,6 +135,10 @@ function rectangularCollision({ playerRectangle, collisionRectangle }) {
   );
 }
 
+const battle = {
+    initiated: false
+}
+
 function animate() {
   window.requestAnimationFrame(animate);
   background.draw();
@@ -147,6 +152,11 @@ function animate() {
   player.draw();
   foreground.draw();
 
+
+  let moving = true;
+  player.moving = false;
+  if(battle.initiated) return
+  // activate a battle
   if(keys.w.pressed || keys.s.pressed || keys.a.pressed || keys.d.pressed) {
     for (let i = 0; i < battleZones.length; i++) {
         const battleZone = battleZones[i];
@@ -158,16 +168,23 @@ function animate() {
             playerRectangle: player,
             collisionRectangle: battleZone,
           }) &&
-          overlappingArea > (player.width * player.height) / 2
+          overlappingArea > (player.width * player.height) / 2 &&
+          Math.random() < 0.01
         ) {
-        console.log("battleZone collision")
+        console.log("activate battle")
+        gsap.to("#overlappingDiv", {
+            opacity: 1,
+            repeat: 3,
+            yoyo: true,
+            duration: 0.3
+        })
+        battle.initiated = true
           break;
         }
       }
   }
 
-  let moving = true;
-  player.moving = false;
+
 
   if (keys.w.pressed && lastKey === "w") {
     player.moving = true;
