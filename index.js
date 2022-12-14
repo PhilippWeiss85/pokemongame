@@ -118,9 +118,10 @@ function animate() {
   player.draw();
   foreground.draw();
   let moving = true;
-  player.moving =false;
+  player.moving = false;
   if (keys.w.pressed && lastKey === "w") {
     player.moving = true;
+    player.image = player.sprites.up
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -146,6 +147,7 @@ function animate() {
       });
   } else if (keys.a.pressed && lastKey === "a") {
     player.moving = true;
+    player.image = player.sprites.left
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -171,6 +173,7 @@ function animate() {
       });
   } else if (keys.d.pressed && lastKey === "d") {
     player.moving = true;
+    player.image = player.sprites.right
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -196,6 +199,7 @@ function animate() {
       });
   } else if (keys.s.pressed && lastKey === "s") {
     player.moving = true;
+    player.image = player.sprites.down
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
