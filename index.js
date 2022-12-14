@@ -353,8 +353,8 @@ function animateBattle() {
     draggle.draw()
 }
 
-//animateBattle()
-animate();
+animateBattle()
+//animate();
 
 let lastKey = "";
 window.addEventListener("keydown", (event) => {
