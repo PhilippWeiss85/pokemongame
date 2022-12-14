@@ -35,8 +35,19 @@ image.src = "./img/Town.png";
 const foregroundImage = new Image();
 foregroundImage.src = "./img/ForegroundObjects.png";
 
-const playerImage = new Image();
-playerImage.src = "./img/playerDown.png";
+const playerDownImage = new Image();
+playerDownImage.src = "./img/playerDown.png";
+
+const playerUpImage = new Image();
+playerUpImage.src = "./img/playerUp.png";
+
+const playerLeftImage = new Image();
+playerLeftImage.src = "./img/playerLeft.png";
+
+const playerRightImage = new Image();
+playerRightImage.src = "./img/playerRight.png";
+
+
 
 
 const player = new Sprite({
@@ -44,10 +55,16 @@ const player = new Sprite({
     x: canvas.width / 2 - 192 / 4 / 2,
     y: canvas.height / 2 - 68 / 2,
   },
-  image: playerImage,
+  image: playerDownImage,
   frames: {
     max: 4,
   },
+  sprites: {
+    up: playerUpImage,
+    down: playerDownImage,
+    right: playerRightImage,
+    left: playerLeftImage,
+  }
 });
 
 const background = new Sprite({
@@ -101,8 +118,9 @@ function animate() {
   player.draw();
   foreground.draw();
   let moving = true;
-
+  player.moving =false;
   if (keys.w.pressed && lastKey === "w") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -127,6 +145,7 @@ function animate() {
         movable.position.y += 3;
       });
   } else if (keys.a.pressed && lastKey === "a") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -151,6 +170,7 @@ function animate() {
         movable.position.x += 3;
       });
   } else if (keys.d.pressed && lastKey === "d") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
@@ -175,6 +195,7 @@ function animate() {
         movable.position.x -= 3;
       });
   } else if (keys.s.pressed && lastKey === "s") {
+    player.moving = true;
     for (let i = 0; i < boundaries.length; i++) {
       const boundary = boundaries[i];
       if (
