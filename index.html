@@ -1,9 +1,42 @@
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital@0;1&family=Press+Start+2P&family=Space+Mono&family=Work+Sans:wght@400;500;800&display=swap" rel="stylesheet">
+    
+
+<style>
+    * {
+        font-family: 'Press Start 2P', cursive;
+    }
+    body {
+        background-color: black
+    }
+
+    h1 {
+        margin:0 ;
+    }
+
+    button {
+        border: 0;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    button:hover {
+        background-color: #ddd;
+    }
+
+</style>
+</head>
 
 
 <body>
-    <div style="display:inline-block; position: relative">
+     <div style="display: inline-block; position: relative">
         <div id="overlappingDiv" style="background-color: black;  position: absolute; top: 0; bottom: 0; left: 0; right: 0; opacity: 0; pointer-events: none" ></div>
     <canvas></canvas>
+    <div style="background-color: white; height:140px; position: absolute; bottom: 0; left: 0; right: 0; border-top: 4px black solid; display: flex;">
+    <div style="width: 66.66%; display: grid; grid-template-columns: repeat(2, 1fr)"><button>Attack 1</button><button>Attack 2</button></div>
+    <div style="display: flex; align-items: center; justify-content: center; width: 33.33%; border-left: 4px black solid"><h1 style="font-size: 1rem;">Attack Type</h1></div>
 </div>
 </body>
 
