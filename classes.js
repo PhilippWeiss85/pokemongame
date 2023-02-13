@@ -1,5 +1,5 @@
 class Sprite {
-    constructor({ position, image, frames = { max: 1, hold: 20 }, sprites, animate=false, isEnemy=false, rotation = 0 }) {
+    constructor({ position, image, frames = { max: 1, hold: 20 }, sprites, animate=false, isEnemy=false, rotation = 0, name }) {
       this.position = position;
       this.image = image;
       this.frames = {... frames, val: 0, elapsed: 0};
@@ -14,6 +14,7 @@ class Sprite {
       this.health = 100
       this.isEnemy = isEnemy
       this.rotation = rotation
+      this.name = name
     }
   
     draw() {
@@ -32,6 +33,7 @@ class Sprite {
         this.position.y,
         this.image.width / this.frames.max,
         this.image.height
+
       );
       c.restore()
 
@@ -50,6 +52,8 @@ class Sprite {
 
 
 attack({attack, recipient, renderedSprites}) {
+  document.querySelector("#dialogueBox").style.display = "block"
+  document.querySelector("#dialogueBox").innerHTML =  this.name + " used " + attack.name
   this.health = this.health - attack.damage
   let healthBar = "#enemyHealthBar"
   if(this.isEnemy) healthBar = "#playerHealthBar"
