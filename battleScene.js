@@ -62,6 +62,11 @@ document.querySelectorAll("button").forEach((button) => {
             renderedSprites
           })
     })
+  })
+  button.addEventListener("mouseenter", (e) => {
+    const selectedAttack = attacks[e.currentTarget.innerHTML]
+    document.querySelector("#attackType").innerHTML = selectedAttack.type
+    document.querySelector("#attackType").style.color = selectedAttack.color
 
   })
 })
