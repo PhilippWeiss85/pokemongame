@@ -68,6 +68,8 @@ function animateBattle() {
 //animate();
 animateBattle()
 
+const queue = []
+
 
 // eventlisteners for attackbuttons
 document.querySelectorAll("button").forEach((button) => {
@@ -78,5 +80,27 @@ document.querySelectorAll("button").forEach((button) => {
       recipient: draggle,
       renderedSprites
     })
+
+    queue.push(() => {
+        draggle.attack({ 
+            attack: attacks.Tackle, 
+            recipient: emby,
+            renderedSprites
+          })
+    })
+    queue.push(() => {
+        draggle.attack({ 
+            attack: attacks.Fireball, 
+            recipient: emby,
+            renderedSprites
+          })
+    })
   })
+})
+
+document.querySelector("#dialogueBox").addEventListener("click", (event) => {
+    if(queue.length > 0) {
+        queue[0]()
+        queue.shift()
+    } else event.currentTarget.style.display = "none"
 })
