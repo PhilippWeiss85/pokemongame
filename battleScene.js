@@ -9,16 +9,18 @@ const battleBackground = new Sprite({
 })
 
 
-const draggle = new Sprite(monsters.Draggle)
-const emby = new Sprite(monsters.Emby)
-
-
-
+const draggle = new Monster(monsters.Draggle)
+const emby = new Monster(monsters.Emby)
 const renderedSprites = [draggle, emby]
 
-const button = document.createElement("button")
-button.innerHTML = "Fireball"
-document.querySelector("#attacksBox").append(button)
+
+emby.attacks.forEach((attack) => {
+    const button = document.createElement("button")
+    button.innerHTML = attack.name
+    document.querySelector("#attacksBox").append(button)
+})
+
+
 
 function animateBattle() {
     window.requestAnimationFrame(animateBattle)
@@ -46,7 +48,7 @@ document.querySelectorAll("button").forEach((button) => {
   button.addEventListener("click", (e) => {
     const selectedAttack = attacks[e.target.innerHTML]
     emby.attack({ 
-      attack: selectedAttack, 
+      attack: selectedAttack,  
       recipient: draggle,
       renderedSprites
     })
