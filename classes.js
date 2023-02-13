@@ -1,13 +1,13 @@
 class Sprite {
     constructor({ position, image, frames = { max: 1, hold: 20 }, sprites, animate=false, rotation = 0, attacks  }) {
       this.position = position;
-      this.image = image;
+      this.image = new Image();
       this.frames = {... frames, val: 0, elapsed: 0};
-  
       this.image.onload = () => {
         this.width = this.image.width / this.frames.max;
         this.height = this.image.height;
       };
+      this.image.src = image.src
       this.animate = animate
       this.sprites = sprites
       this.opacity = 1
@@ -48,9 +48,6 @@ class Sprite {
       else this.frames.val = 0;
     }
 }
-
-
-
 }
 
 
@@ -69,10 +66,22 @@ class Sprite {
       this.name = name
       this.attacks = attacks
     }
+
+    faint() {
+      document.querySelector("#dialogueBox").innerHTML =  this.name + " fainted!"
+      gsap.to(this.position, {
+        y: this.position.y + 20
+      })
+      gsap.to(this, {
+        opacity: 0
+      })
+    }
+
+
     attack({attack, recipient, renderedSprites}) {
       document.querySelector("#dialogueBox").style.display = "block"
       document.querySelector("#dialogueBox").innerHTML =  this.name + " used " + attack.name
-      this.health = this.health - attack.damage
+      recipient.health = this.health - attack.damage
       let healthBar = "#enemyHealthBar"
       if(this.isEnemy) healthBar = "#playerHealthBar"
     
@@ -104,7 +113,7 @@ class Sprite {
           y: recipient.position.y,
           onComplete: () => {
              gsap.to(healthBar, {
-                width: this.health + "%",
+                width: recipient.health + "%",
               })
               gsap.to(recipient.position, {
                 x: recipient.position.x + 10,
@@ -139,7 +148,7 @@ class Sprite {
             onComplete: () => {
               // enemy gets hit here
               gsap.to(healthBar, {
-                width: this.health + "%",
+                width: recipient.health + "%",
               })
               gsap.to(recipient.position, {
                 x: recipient.position.x + 10,
