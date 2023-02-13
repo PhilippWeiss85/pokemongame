@@ -75,6 +75,8 @@ class Sprite {
       gsap.to(this, {
         opacity: 0
       })
+      audio.battle.stop()
+      audio.victory.play()
     }
 
 
@@ -90,6 +92,7 @@ class Sprite {
     
       switch(attack.name) {
         case "Fireball":
+        audio.initFireball.play()
         const fireballImage = new Image()
         fireballImage.src = "./img/fireball.png"
         const fireball = new Sprite({
@@ -112,6 +115,7 @@ class Sprite {
           x: recipient.position.x,
           y: recipient.position.y,
           onComplete: () => {
+            audio.fireballHit.play()
              gsap.to(healthBar, {
                 width: recipient.health + "%",
               })
@@ -147,6 +151,7 @@ class Sprite {
             duration: 0.1,
             onComplete: () => {
               // enemy gets hit here
+              audio.tackleHit.play()
               gsap.to(healthBar, {
                 width: recipient.health + "%",
               })

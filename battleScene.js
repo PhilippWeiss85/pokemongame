@@ -57,6 +57,7 @@ function initBattle() {
                 opacity: 0,
               });
               battle.initiated = false
+              audio.Map.play()
             },
           });
         });
@@ -88,6 +89,7 @@ function initBattle() {
                   opacity: 0,
                 });
                 battle.initiated = false
+                audio.Map.play()
               },
             });
           });
@@ -112,9 +114,9 @@ function animateBattle() {
   });
 }
 
-//animate();
-initBattle();
-animateBattle();
+animate();
+//initBattle();
+//animateBattle();
 
 document.querySelector("#dialogueBox").addEventListener("click", (event) => {
   if (queue.length > 0) {

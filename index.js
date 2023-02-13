@@ -3,7 +3,6 @@ const c = canvas.getContext("2d");
 
 
 
-
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -157,7 +156,7 @@ function animate() {
   let moving = true;
   player.animate = false;
 
-  console.log(animationId)
+
   if(battle.initiated) return
   // activate a battle
   if(keys.w.pressed || keys.s.pressed || keys.a.pressed || keys.d.pressed) {
@@ -174,12 +173,14 @@ function animate() {
           overlappingArea > (player.width * player.height) / 2 &&
           Math.random() < 0.01
         ) {
-        console.log("activate battle")
+
 
          // deactivate current animationloop
         window.cancelAnimationFrame(animationId)
         
-        
+          audio.Map.stop()
+          audio.initBattle.play()
+          audio.battle.play()
           battle.initiated = true
         gsap.to("#overlappingDiv", {
             opacity: 1,
@@ -224,7 +225,7 @@ function animate() {
           },
         })
       ) {
-        console.log("colliding");
+    
         moving = false;
         break;
       }
@@ -251,7 +252,7 @@ function animate() {
           },
         })
       ) {
-        console.log("colliding");
+
         moving = false;
         break;
       }
@@ -279,7 +280,7 @@ function animate() {
           },
         })
       ) {
-        console.log("colliding");
+  
         moving = false;
         break;
       }
@@ -308,7 +309,6 @@ function animate() {
           },
         })
       ) {
-        console.log("colliding");
         moving = false;
         break;
       }
@@ -362,3 +362,10 @@ window.addEventListener("keyup", (event) => {
       break;
   }
 });
+
+let clicked = false
+addEventListener("click", () => {
+  if(!clicked) {
+  audio.Map.play()
+  clicked = true
+}})
